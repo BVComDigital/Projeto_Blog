@@ -1,0 +1,24 @@
+version: '3.9'
+
+services: #cria os containers
+  djangoapp: #Cria este container
+    container_name: djangoapp #Dá nome, se não usar, paga o nome do container
+    build: #Busca o arquivo dockerfile para executar os comandos
+      context: .
+    ports:
+      - 8000:8000
+    volumes: #mapeia as pastas para refletir no container
+      - ./djangoapp:/djangoapp
+      - ./data/web/static:/data/web/static/ #não necessário
+      - ./data/web/media:/data/web/media/ #não necessário
+    env_file:
+      - ./dotenv_files/.env
+    depends_on: #Cria dependência do Django com o postgres
+      - psql
+  psql:
+    container_name: psql
+    image: postgres:18-alpine
+    volumes:
+      - ./data/postgres/data:/var/lib/postgresql/data/
+    env_file:
+      - ./dotenv_files/.env
