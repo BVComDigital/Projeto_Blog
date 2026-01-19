@@ -124,7 +124,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # /data/web/static
-STATIC_HOOT = DATA_DIR / 'static'
+STATIC_ROOT = DATA_DIR / 'static'
 
 MEDIA_URL = '/media/'
 # /data/web/media
